@@ -18,7 +18,7 @@ public abstract class Bag {
     private String color;
     private int numberOfContents;
     private int capacity;
-    private ArrayList contents;
+    private String[] contents;
 
     /*
      * TODO: Create a constructor that takes two arguments:
@@ -33,7 +33,7 @@ public abstract class Bag {
         this.color = color;
         this.capacity = capacity;
         this.numberOfContents = 0;
-        this.contents = new ArrayList();
+        this.contents = new String[capacity];
     }
 
     /*
@@ -72,8 +72,8 @@ public abstract class Bag {
      *       and false otherwise.
      */
     public boolean addItem(String item) {
-        if (this.numberOfContents < this.capacity) {
-            this.contents.add(item);
+        if (numberOfContents < capacity) {
+            this.contents[numberOfContents] = item;
             this.numberOfContents += 1;
             return true;
         } else {
@@ -92,12 +92,12 @@ public abstract class Bag {
      * @return
      */
     public String popItem() {
-        if (this.numberOfContents == 0) {
+        if (numberOfContents == 0) {
             return null;
         } else {
-            String last = contents.get(-1).toString();  // save last string
-            contents.remove(-1); // remove last string
-            this.numberOfContents -= 1; // update num of contents
+            numberOfContents -= 1;
+            String last = this.contents[numberOfContents];  // save last string
+            this.contents[numberOfContents] = null; // remove last string
             return last;
         }
     }
